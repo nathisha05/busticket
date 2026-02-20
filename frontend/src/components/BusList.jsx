@@ -95,7 +95,7 @@ function BusList() {
           onClick={handleBackToList}
           style={{
             padding: "10px 15px",
-            background: "#95a5a6",
+            background: "#1e90ff",
             color: "white",
             border: "none",
             borderRadius: "4px",
@@ -141,16 +141,15 @@ function BusList() {
               borderRadius: "8px",
               backgroundColor: hoveredBus === (bus.id || bus._id) ? "#f8f9fa" : "white",
               boxShadow: hoveredBus === (bus.id || bus._id) ? "0 4px 12px rgba(0,0,0,0.15)" : "0 2px 4px rgba(0,0,0,0.1)",
-              transition: "all 0.3s ease",
               cursor: "pointer"
             }}
           >
-            <h3 style={{ marginBottom: "12px", color: "#3498db" }}>{bus.name || bus.operator || 'Unknown Bus'}</h3>
+            <h3 style={{ marginBottom: "12px", color: "#1e90ff" }}>{bus.name || bus.operator || 'Unknown Bus'}</h3>
             <p style={{ margin: "8px 0", fontWeight: "bold", color: "#e74c3c" }}>{bus.busType || bus.type || 'Unknown Type'}</p>
             <p style={{ margin: "8px 0" }}>Time: {bus.time || new Date(bus.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
             <p style={{ margin: "8px 0" }}>Duration: {bus.duration || 'N/A'}</p>
             <p style={{ margin: "8px 0" }}>Seats: {bus.seats || bus.availableSeats || 'N/A'}</p>
-            <p style={{ margin: "12px 0", fontSize: "1.1em", fontWeight: "bold", color: "#3498db" }}>
+            <p style={{ margin: "12px 0", fontSize: "1.1em", fontWeight: "bold", color: "#1e90ff" }}>
               ₹{bus.price}
             </p>
             <button
@@ -158,16 +157,15 @@ function BusList() {
               style={{
                 width: "100%",
                 marginTop: "12px",
-                background: "#3498db",
+                background: "#1e90ff",
                 color: "white",
                 border: "none",
                 padding: "10px",
                 borderRadius: "4px",
-                cursor: "pointer",
-                transition: "background 0.3s ease"
+                cursor: "pointer"
               }}
-              onMouseEnter={(e) => e.target.style.background = "#2980b9"}
-              onMouseLeave={(e) => e.target.style.background = "#3498db"}
+              onMouseEnter={(e) => e.target.style.background = "#00bfff"}
+              onMouseLeave={(e) => e.target.style.background = "#1e90ff"}
             >
               Select Bus →
             </button>

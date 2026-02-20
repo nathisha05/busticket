@@ -94,7 +94,8 @@ function SeatSelection({ bus }) {
                   className={`seat ${isSelected ? "selected" : ""} ${isBooked ? "booked" : ""}`}
                   style={{
                     padding: "10px 6px",
-                    minHeight: "36px"
+                    minHeight: "36px",
+                    color: isSelected || isBooked ? "white" : "#1e90ff"
                   }}
                   disabled={isBooked}
                 >
@@ -140,7 +141,7 @@ function SeatSelection({ bus }) {
                 style={{
                   flex: "1",
                   padding: "10px",
-                  background: "#95a5a6",
+                  background: "#1e90ff",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
@@ -154,7 +155,7 @@ function SeatSelection({ bus }) {
                 style={{
                   flex: "1",
                   padding: "10px",
-                  background: "#27ae60",
+                  background: "#1e90ff",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",

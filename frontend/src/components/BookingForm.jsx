@@ -66,6 +66,7 @@ function BookingForm({ bus, seat }) {
           name: name.trim(),
           age: ageNum,
           gender: gender,
+          phone: phone.trim(),
           seatNumber: seat.toString()
         }],
         journeyDate: bus.journeyDate || new Date().toISOString().split('T')[0],
@@ -74,15 +75,23 @@ function BookingForm({ bus, seat }) {
       
       const response = await api.post('/bookings', bookingPayload);
       
-      // Store booking data for ticket display
-      setBookingData({
-        ...response.data,
-        passengerName: name,
-        passengerPhone: phone,
-        passengerAge: age,
-        passengerGender: gender
-      });
+      // Store booking data for ticket display with consistent structure
+      const bookingInfo = {
+        id: response.data._id || response.data.id,
+        name: name.trim(),
+        phone: phone.trim(),
+        age: age,
+        gender: gender,
+        bus: bus.name,
+        busType: bus.busType || bus.type,
+        seat: seat.toString(),
+        price: bus.price,
+        journeyDate: bus.journeyDate || new Date().toISOString().split('T')[0],
+        bookingDate: new Date().toLocaleDateString(),
+        email: user?.email
+      };
       
+      setBookingData(bookingInfo);
       setShowTicket(true);
     } catch (err) {
       console.error("Booking error:", err);
@@ -113,14 +122,14 @@ function BookingForm({ bus, seat }) {
   };
 
   if (showTicket) {
-    return <Ticket />;
+    return <Ticket bookingData={bookingData} />;
   }
 
   return (
     <div className="form-container">
       <h3>Passenger Details</h3>
 
-      <div style={{ textAlign: "left", marginBottom: "15px", fontSize: "0.9em" }}>
+      <div style={{ textAlign: "left", marginBottom: "12px", fontSize: "0.85em" }}>
         <p style={{ margin: "6px 0", color: "#666" }}>
           <strong>Bus:</strong> {bus.name}
         </p>
@@ -138,71 +147,100 @@ function BookingForm({ bus, seat }) {
         </p>
       )}
 
-      <input
-        placeholder="Full Name"
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-          setError("");
-        }}
-        style={{ width: "100%", marginBottom: "5px" }}
-      />
-      <p style={{ fontSize: "0.8em", color: "#999", marginBottom: "12px", marginTop: "0" }}>
-        • Must be at least 3 characters • Letters and spaces only
-      </p>
+      <div style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", marginBottom: "4px", fontWeight: "600", fontSize: "0.85em", color: "#333" }}>
+          Full Name
+        </label>
+        <input
+          placeholder="Enter your full name"
+          value={name}
+          maxLength={50}
+          onChange={(e) => {
+            setName(e.target.value);
+            setError("");
+          }}
+          style={{ 
+            width: "100%", 
+            padding: "8px", 
+            borderRadius: "4px", 
+            border: "1px solid #ddd",
+            fontSize: "0.9em"
+          }}
+        />
+      </div>
 
-      <input
-        placeholder="Phone Number"
-        type="tel"
-        value={phone}
-        onChange={(e) => {
-          setPhone(e.target.value);
-          setError("");
-        }}
-        style={{ width: "100%", marginBottom: "5px" }}
-      />
-      <p style={{ fontSize: "0.8em", color: "#999", marginBottom: "12px", marginTop: "0" }}>
-        • Must be 10-15 digits • Numbers only
-      </p>
+      <div style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", marginBottom: "4px", fontWeight: "600", fontSize: "0.85em", color: "#333" }}>
+          Phone Number
+        </label>
+        <input
+          placeholder="Enter 10-digit phone number"
+          type="tel"
+          value={phone}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            setError("");
+          }}
+          style={{ 
+            width: "100%", 
+            padding: "8px", 
+            borderRadius: "4px", 
+            border: "1px solid #ddd",
+            fontSize: "0.9em"
+          }}
+        />
+      </div>
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "5px" }}>
-        <div style={{ flex: 1 }}>
-          <input
-            placeholder="Age"
-            type="number"
-            value={age}
-            onChange={(e) => {
-              setAge(e.target.value);
-              setError("");
-            }}
-            style={{ width: "100%", marginBottom: "5px" }}
-            min="1"
-            max="120"
-          />
-          <p style={{ fontSize: "0.8em", color: "#999", marginBottom: "12px", marginTop: "0" }}>
-            • Enter age (1-120)
-          </p>
-        </div>
-        <div style={{ flex: 1 }}>
-          <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            style={{ width: "100%", padding: "10px", marginBottom: "5px", borderRadius: "4px", border: "1px solid #ddd" }}
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          <p style={{ fontSize: "0.8em", color: "#999", marginBottom: "12px", marginTop: "0" }}>
-            • Select gender
-          </p>
-        </div>
+      <div style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", marginBottom: "4px", fontWeight: "600", fontSize: "0.85em", color: "#333" }}>
+          Age
+        </label>
+        <input
+          placeholder="Age"
+          type="number"
+          value={age}
+          onChange={(e) => {
+            setAge(e.target.value);
+            setError("");
+          }}
+          style={{ 
+            width: "100%", 
+            padding: "8px", 
+            borderRadius: "4px", 
+            border: "1px solid #ddd",
+            fontSize: "0.9em"
+          }}
+          min="1"
+          max="120"
+        />
+      </div>
+
+      <div style={{ marginBottom: "12px" }}>
+        <label style={{ display: "block", marginBottom: "4px", fontWeight: "600", fontSize: "0.85em", color: "#333" }}>
+          Gender
+        </label>
+        <select
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          style={{ 
+            width: "100%", 
+            padding: "8px", 
+            borderRadius: "4px", 
+            border: "1px solid #ddd",
+            fontSize: "0.9em",
+            backgroundColor: "white"
+          }}
+        >
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
 
       <button
         onClick={handleBook}
         disabled={loading}
-        style={{ width: "100%", marginTop: "12px", background: "#3498db", opacity: loading ? 0.7 : 1 }}
+        style={{ width: "100%", marginTop: "10px", padding: "10px", background: "#1e90ff", opacity: loading ? 0.7 : 1, color: "white", border: "none", borderRadius: "4px", cursor: "pointer", fontWeight: "600", fontSize: "0.9em" }}
       >
         {loading ? "Booking..." : "Book Ticket"}
       </button>

@@ -1,6 +1,10 @@
+// This file is used to populate the database with sample bus data
+// Run this file using: node seed.js
+
 const mongoose = require('mongoose');
 require('dotenv').config();
 const { Bus } = require('./schema');
+
 
 const sampleBuses = [
   {
@@ -82,14 +86,22 @@ const sampleBuses = [
   }
 ];
 
+// Main function to seed the database
 async function seedDatabase() {
   try {
+    
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/bus-ticket-db');
     console.log('Connected to MongoDB');
+    
+    // Clear all existing bus data 
     await Bus.deleteMany({});
     console.log('Cleared existing buses');
+    
+    // Insert sample bus data into database
     const buses = await Bus.insertMany(sampleBuses);
     console.log(`Successfully seeded ${buses.length} buses`);
+    
+    // Display all seeded buses
     console.log('\n Seeded Buses:');
     buses.forEach((bus, index) => {
       console.log(`${index + 1}. ${bus.busNumber} - ${bus.from} to ${bus.to} (${bus.busType}) - ₹${bus.price}`);

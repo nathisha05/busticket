@@ -131,7 +131,7 @@ function SearchBus() {
           maxWidth: "300px",
           display: "block",
           margin: "15px auto 0",
-          background: loading ? "#ccc" : "#3498db",
+          background: loading ? "#ccc" : "#1e90ff",
           cursor: loading ? "not-allowed" : "pointer"
         }}
       >

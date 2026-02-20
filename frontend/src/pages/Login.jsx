@@ -156,7 +156,7 @@ function Login() {
         <p className="login-footer">
           {isRegister ? "Already have an account? " : "Don't have an account? "}
           <span 
-            style={{ color: "#3498db", cursor: "pointer", fontWeight: "bold" }}
+            style={{ color: "#1e90ff", cursor: "pointer", fontWeight: "bold" }}
             onClick={() => {
               setIsRegister(!isRegister);
               setErrors({});

@@ -25,19 +25,24 @@ body {
 
 /* Navbar */
 .navbar {
-  background: #34495e;
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-brand h1 {
-  color: #3498db;
-  font-size: 1.5em;
+  color: white;
+  font-size: 1.8em;
   margin: 0;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .nav-links {
@@ -49,13 +54,12 @@ body {
   color: white;
   text-decoration: none;
   font-weight: 500;
-  padding: 10px 14px;
-  border-radius: 4px;
-  transition: background 0.3s;
+  padding: 8px 16px;
+  border-radius: 6px;
 }
 
 .nav-link:hover {
-  background: rgba(52, 152, 219, 0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .nav-user {
@@ -65,24 +69,29 @@ body {
 }
 
 .user-info {
-  color: #3498db;
+  color: white;
   font-weight: 600;
-  font-size: 0.9em;
+  font-size: 0.95em;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .logout-btn {
   background: #e74c3c;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
 }
 
 .logout-btn:hover {
   background: #c0392b;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
 }
 
 
@@ -133,7 +142,6 @@ p {
   border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.3s ease;
   min-height: 44px;
   touch-action: manipulation;
   -webkit-appearance: none;
@@ -152,56 +160,59 @@ p {
 .search-container select:focus,
 .search-container input:focus {
   outline: none;
-  border: 2px solid #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  border: 2px solid #1e90ff;
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
 }
 
 /* Button Styles */
 button {
   padding: 12px 24px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  background: #3498db;
+  background: #1e90ff;
   color: white;
   font-weight: 600;
-  transition: all 0.3s ease;
   font-size: 0.95em;
   margin: 5px;
   min-height: 44px;
   min-width: 44px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
 }
 
 button:hover {
-  background: #2980b9;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: #00bfff;
+  box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
 }
 
 button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 10px rgba(30, 144, 255, 0.3);
 }
 
 button:focus {
-  outline: 2px solid #3498db;
+  outline: 2px solid #1e90ff;
   outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Bus Card */
 .bus-card {
   background: white;
-  padding: 20px;
+  padding: 25px;
   margin: 15px 0;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .bus-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .bus-card h3 {
@@ -238,13 +249,12 @@ button:focus {
   cursor: pointer;
   background: white;
   font-weight: 600;
-  transition: all 0.3s;
   font-size: 0.95em;
 }
 
 .seat:hover:not(.booked) {
-  border: 1px solid #3498db;
-  background: #ecf7ff;
+  border: 1px solid #1e90ff;
+  background: #e6f7ff;
 }
 
 .seat.selected {
@@ -283,7 +293,6 @@ button:focus {
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
-  transition: all 0.3s ease;
   font-family: inherit;
   min-height: 44px;
   touch-action: manipulation;
@@ -291,8 +300,8 @@ button:focus {
 
 .form-container input:focus {
   outline: none;
-  border: 2px solid #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  border: 2px solid #1e90ff;
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
 }
 
 .form-container button {
@@ -302,7 +311,7 @@ button:focus {
 
 /* Ticket */
 .ticket {
-  background: #3498db;
+  background: #1e90ff;
   color: white;
   padding: 30px;
   margin: 30px auto;
@@ -335,7 +344,6 @@ button:focus {
   max-width: 600px;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
 }
 
 .history-card:hover {
